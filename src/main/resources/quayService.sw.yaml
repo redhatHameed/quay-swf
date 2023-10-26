@@ -2,10 +2,10 @@ id: quayservice
 version: '1.0'
 specVersion: 0.8.0
 name: "Quay Example"
-start: createRepoState
+start: CreateRepository
 errors:
-- name: InvalidArgumentException
-  code: java.lang.IllegalArgumentException
+  - name: RuntimeException
+    code: java.lang.RuntimeException
 dataInputSchema: quayWorkflowSchema.json
 functions:
 - name: printMessage
@@ -21,7 +21,7 @@ functions:
   type: custom
   operation: rest:get:http://localhost:7008/quay/get/{namespace}/{repository}
 states:
-- name: createRepoState
+- name: CreateRepository
   type: operation
   actions:
   - name: getRepository
@@ -38,13 +38,9 @@ states:
         repository: ".repository"
         namespace: ".namespace"
         visibility: ".visibility"
-  - name: getURLforBranch
-    functionRef:
-      refName: logInfo
-      arguments:
-        message: '"URL is: " + .object.url'
+        description: ".description"
   onErrors:
-  - errorRef: InvalidArgumentException
+  - errorRef: RuntimeException
     transition: invalidRepository
   end: true
 - name: invalidRepository
