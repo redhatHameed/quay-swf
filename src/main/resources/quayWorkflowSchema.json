@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "namespace": {
+      "type": "string",
+      "description": "Name of the requested namespace"
+    },
+    "repository": {
+      "type": "string",
+      "description": "Repository name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Image description"
+    },
+    "visibility": {
+      "type": "string",
+      "description": "Repository visibility"
+    }
+  },
+  "required": [
+    "namespace",
+    "repository",
+    "visibility"
+  ]
+}
